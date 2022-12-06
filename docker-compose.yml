@@ -1,0 +1,96 @@
+version: "3.9"
+
+services:
+  ### PHP-FPM Container #######################################
+
+  php:
+    build:
+      context: ./php
+      dockerfile: Dockerfile
+    container_name: php
+    depends_on:
+      - mysql
+      - redis
+    restart: unless-stopped
+    tty: true
+    working_dir: /var/www
+    volumes:
+      - ./wwwroot:/var/www
+      - ./php/additional.ini:/usr/local/etc/php/conf.d/additional.ini
+    networks:
+      - app-network
+
+  ### Nginx Server Container ##################################
+
+  nginx:
+    image: nginx:stable-alpine
+    container_name: nginx
+    depends_on:
+      - php
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "8080:80"
+      - "4433:443"
+      - "8000:8000"
+      - "8080:8080"
+       # Add the port for Xdebug here
+      - "9001:9001"
+    environment:
+      MYSQL_ROOT_PASSWORD: 12345678
+      TZ: Asia/Shanghai
+    volumes:
+      - ./wwwroot:/var/www
+      - ./nginx/conf.d/:/etc/nginx/conf.d/
+      - ./nginx/log:/var/log/nginx
+    networks:
+      - app-network
+
+  ### MySQL Container #########################################
+
+  mysql:
+    image: mysql/mysql-server:latest-aarch64
+    container_name: mysql
+    tty: true
+    ports:
+      - "33060:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: 12345678
+      TZ: Asia/Shanghai
+    volumes:
+      - mysqldata:/var/lib/mysql
+      - ./mysql/my.cnf:/etc/mysql/my.cnf
+    restart: always
+    networks:
+      - app-network
+
+  ### Redis Container #########################################
+
+  redis:
+    image: redis:alpine
+    container_name: redis
+    ports:
+      - "6379:6379"
+    environment:
+      MYSQL_ROOT_PASSWORD: 12345678
+      TZ: Asia/Shanghai
+    volumes:
+      - redisdata:/data
+      - ./redis/conf:/usr/local/etc/redis
+      - ./redis/log:/log
+    # 指定配置文件启动redis
+    command: ["redis-server", "/usr/local/etc/redis/redis.conf"]
+    restart: always
+    networks:
+      - app-network
+
+#Docker Networks
+networks:
+  app-network:
+    driver: bridge
+#Volumes
+volumes:
+  mysqldata:
+    driver: local
+  redisdata:
+    driver: local
