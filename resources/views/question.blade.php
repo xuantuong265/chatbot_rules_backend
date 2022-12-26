@@ -37,7 +37,7 @@
                     <td>{{ $q->id }}</td>
                     <td>{{ $q->option }}</td>
                     <td>{{ $q->entity }}</td>
-                    <td>{{ $q->text }}</td>
+                    <td>{{ $q->test }}</td>
                 </tr>
                 @endforeach
             </table>

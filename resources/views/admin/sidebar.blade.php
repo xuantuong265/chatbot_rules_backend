@@ -31,7 +31,7 @@
             <a href="#" class="nav-link">
               <i class="fas fa-align-justify"></i>
               <p>
-               Category
+               Student
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
@@ -40,7 +40,7 @@
                 <li class="nav-item">
                     <a href="{{route('category.add')}}" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
-                      <p>Add category</p>
+                      <p>Add student</p>
                     </a>
                   </li>
                 @endcan
@@ -48,7 +48,7 @@
               <li class="nav-item">
                 <a href="{{route('category.show')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>List category</p>
+                  <p>List student</p>
                 </a>
               </li>
                 @endcan
@@ -57,7 +57,7 @@
           </li>
 
 
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="fa fa-shopping-bag"></i>
                         <p>Prouduct
@@ -129,7 +129,8 @@
                         </li>
                 @endcan
                     </ul>
-                </li>
+                </li> -->
+
                 @role('admin')
                 <li class="nav-item">
                     <a href="#" class="nav-link">

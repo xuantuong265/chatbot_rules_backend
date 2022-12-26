@@ -9,6 +9,8 @@ class QAndA extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'option','entity','text'
+        'option',
+        'entity',
+        'test',
     ];
 }

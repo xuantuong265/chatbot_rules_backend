@@ -21,7 +21,7 @@ class QAndAImport implements ToModel, WithHeadingRow
             'id' => $row['id'],
             'option'     => $row['option'],
             'entity'    => $row['entity'],
-            'text' =>   $row['text']
+            'test' =>   $row['test']
         ]);
     }
 }
