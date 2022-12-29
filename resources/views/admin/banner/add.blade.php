@@ -10,32 +10,37 @@
                 </div>
             @endif
             <form method="post" action="{{route('banner.store')}}" enctype="multipart/form-data">
-                @csrf
-                <div class="form-group">
-                    <label for="exampleInputTitle">Title</label>
-                    <input type="text" name="title" class="form-control" id="exampleInputTitle" value="">
-                </div>
-                <div class="form-group">
-                    <label for="exampleInputLink">link</label>
-                    <input type="text" class="form-control" id="exampleInputLink" name="link" value="">
-                </div>
-                <div class="form-group">
-                    <label for="exampleInputDescription">Description</label>
-                    <input type="text" class="form-control" id="exampleInputDescription" name="description" value="">
-                </div>
-
-                <div class="form-group">
-                   <label for="customFile"> Image</label>
-                    <div class="custom-file">
-                      <input type="file" name="image" class="custom-file-input" id="customFile">
-                      <label class="custom-file-label" for="customFile">Choose file</label>
-                    </div>
-                  </div>
-
-                <input type="submit" class="btn btn-primary" value="Submit">
-                <div class="form-group">
-                </div>
+                <form action="{{ route('users.import') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <input type="file" name="file" class="form-control">
+                    <br>
+                    <button class="btn btn-success">Import Data</button>
+                </form>
             </form>
+
+            <table class="table table-bordered mt-3">
+                <tr>
+                    <th colspan="3">
+                        List Of Users
+                        <a class="btn btn-warning float-end" href="{{ route('users.export') }}">Export User Data</a>
+                    </th>
+                </tr>
+                <tr>
+                    <th>ID</th>
+                    <th>Option</th>
+                    <th>Entity</th>
+                    <th>Text</th>
+                </tr>
+          
+                @foreach($qa as $q)
+                <tr>
+                    <td>{{ $q->id }}</td>
+                    <td>{{ $q->option }}</td>
+                    <td>{{ $q->entity }}</td>
+                    <td>{{ $q->test }}</td>
+                </tr>
+                @endforeach
+            </table>
         </div>
 
 

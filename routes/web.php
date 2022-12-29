@@ -17,7 +17,7 @@ use App\Http\Controllers;
 
 Route::prefix('')->group(function(){
 Route::get('/index','View\MainController@index')->name('show.main');
-Route::get('','View\MainController@show')->name('show.product');
+// Route::get('','View\MainController@show')->name('show.product');
 Route::get('productdetail/{id}', 'View\MainController@showdetail')->name('show.productdetail');
 Route::get('productbycategory/{id}','View\MainController@showbycategory')->name('show.productcategory');
 
@@ -52,9 +52,14 @@ Route::post('reset-password', 'PasswordResetController@submitResetPasswordForm')
 Route::middleware('admin.login')->group(function(){
     Route::get('logout','LoginController@logout')->name('admin.logout');
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-    Route::get('/admin','Admin\AdminController@index')->name('admin.home');
+    Route::get('/','Admin\AdminController@index')->name('admin.home');
 
-
+    Route::controller(QAndAController::class)->group(function(){
+        Route::get('qa', 'index')->name('import.data')->middleware('permission:add data');
+        Route::get('qa-export', 'export')->name('users.export');
+        Route::post('qa-import', 'import')->name('users.import');
+        Route::get('api', 'api')->name('qa.api');
+    });
     // category
     Route::prefix('category')->group(function () {
         Route::get('show', 'Admin\CategoryController@index')->name('category.show');
@@ -117,11 +122,8 @@ Route::middleware('admin.login')->group(function(){
         Route::get('filter','Admin\FilterController@filter')->name('filter.product');
     });
 
+    Route::get('/student', 'StudentController@index' )->name('student.get')->middleware('permission:read student');;
+    Route::get('/student/{id}', 'StudentController@score' )->name('studentSubject.get');
+});
+Route::get('/showapi', 'StudentController@show');
 
-});
-Route::controller(QAndAController::class)->group(function(){
-    Route::get('qa', 'index');
-    Route::get('qa-export', 'export')->name('users.export');
-    Route::post('qa-import', 'import')->name('users.import');
-    Route::get('api', 'api')->name('qa.api');
-});

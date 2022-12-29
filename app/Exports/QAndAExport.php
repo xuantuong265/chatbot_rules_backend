@@ -14,7 +14,7 @@ class QAndAExport implements FromCollection, WithHeadings
     */
     public function collection()
     {
-        return QAndA::select("id","option", "entity", "text")->get();
+        return QAndA::select("id","option", "entity", "test")->get();
     }
 
     /**
@@ -24,6 +24,6 @@ class QAndAExport implements FromCollection, WithHeadings
      */
     public function headings(): array
     {
-        return ["ID", "Option", "Entity","Text"];
+        return ["ID", "Option", "Entity","Test"];
     }
 }

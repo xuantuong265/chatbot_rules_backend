@@ -36,17 +36,9 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
-                @can('add category')
-                <li class="nav-item">
-                    <a href="{{route('category.add')}}" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Add student</p>
-                    </a>
-                  </li>
-                @endcan
-                @can('read category')
+                @can('read student')
               <li class="nav-item">
-                <a href="{{route('category.show')}}" class="nav-link">
+                <a href="{{route('student.get')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>List student</p>
                 </a>
@@ -83,36 +75,29 @@
                         @endcan
                     </ul>
                 </li>
+                -->
                 @role('admin')
 
                 <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="fas fa-images"></i>
-                        <p> Banner
+                        <p> Train data
                             <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
-                        @can('add banner')
+                        @can('add data')
                         <li class="nav-item">
-                            <a href="{{ route('banner.showCreate') }}" class="nav-link">
+                            <a href="{{ route('import.data') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Add Banner</p>
-                            </a>
-                        </li>
-                        @endcan
-                        @can('read banner')
-                        <li class="nav-item">
-                            <a href="{{route('banner.index')}}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>List banner</p>
+                                <p>Data</p>
                             </a>
                         </li>
                         @endcan
                     </ul>
                 </li>
                 @endrole
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="fas fa-cart-plus"></i>
                         <p> Cart
@@ -129,7 +114,7 @@
                         </li>
                 @endcan
                     </ul>
-                </li> -->
+                </li>  --}}
 
                 @role('admin')
                 <li class="nav-item">

@@ -1,15 +1,10 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Laravel 9 Import Export Excel to Database Example - ItSolutionStuff.com</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>
+@extends('admin.main')
+@section('content')
 
 <div class="container">
     <div class="card bg-light mt-3">
         <div class="card-header">
-            Laravel 9 Import Export Excel to Database Example - ItSolutionStuff.com
+           Import data train
         </div>
         <div class="card-body">
             <form action="{{ route('users.import') }}" method="POST" enctype="multipart/form-data">
@@ -46,6 +41,5 @@
     </div>
 </div>
 
-</body>
-</html>
+@endsection
 

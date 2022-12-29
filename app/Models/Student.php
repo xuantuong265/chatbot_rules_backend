@@ -24,6 +24,17 @@ class Student extends Model
         'average_socre',
     ];
 
+
+    /**
+     * Get the subjects that owns the Student
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function subjects()
+    {
+        return $this->belongsTo(Subject::class, 'student_id', 'id');
+    }
+
     protected static function newFactory()
     {
         return StudentFactory::new();

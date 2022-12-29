@@ -48,6 +48,7 @@ class QAndAController extends Controller
         foreach ($data->toArray() as $item => $value)
         {
             $data1 = $this->formatData($value);
+
             $listItem[] =[
                 'intent' => $item,
                 'utterances' => $data1['question'],

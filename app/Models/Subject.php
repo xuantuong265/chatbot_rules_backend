@@ -23,6 +23,8 @@ class Subject extends Model
     {
         return $this->hasOne(Student::class);
     }
+
+
     protected static function newFactory()
     {
         return SubjectFactory::new();

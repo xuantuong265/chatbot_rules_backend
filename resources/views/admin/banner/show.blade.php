@@ -20,7 +20,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach ($banners as $banner)
+        @foreach ($qa as $banner)
         <tr>
             <td>{{ $loop->iteration }}</td>
             <td>{{ $banner->title }}</td>
